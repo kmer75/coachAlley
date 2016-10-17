@@ -19,4 +19,6 @@ public interface TokenService {
     Token findTokenByToken(String token);
 
     String createToken();
+
+    void delete(Token t);
 }

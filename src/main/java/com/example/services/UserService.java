@@ -25,13 +25,5 @@ public interface UserService {
 
     User save(User user);
 
-    void creerCoach(User u, HttpServletRequest hsr) throws MessagingException;
-
-    void verifierEmail(String email) throws CheckEmailException;
-
-    void envoyerEmailActivationCompte(String email, Token token, HttpServletRequest hsr) throws MessagingException;
-
-    User activerCompte(String token) throws Exception;
-
     void forgetPasswordEnvoieMail(String email) throws CheckEmailException;
 }

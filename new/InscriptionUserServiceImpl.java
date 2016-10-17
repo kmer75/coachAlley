@@ -28,29 +28,12 @@ public class InscriptionUserServiceImpl implements InscriptionUserService{
     @Autowired
     EmailSenderService emailSenderService;
 
-    @Autowired
-    UserRepository userRepository;
-
     @Override
     public void creerUser(User u, HttpServletRequest hsr) throws MessagingException {
         Token t = new Token(tokenService.createToken());
         String url = UrlContextPath.getURLWithContextPath(hsr);
         creationUserService.creerUser(u,t);
         emailSenderService.envoyerMailDuToken(u, t, url);
-    }
-
-
-    @Override
-    public User activerCompte(String token) throws Exception{
-        User u = userRepository.findUserByTokenToken(token);
-        if(u == null) {
-            throw new Exception("User non trouvé");
-        }
-        u.setConfirmPassword(u.getPassword()); //pour valider validator de l'entite
-        u.setEnabled(true);
-        u.setAccountNonLocked(true);
-        userRepository.save(u);
-        return u;
     }
 
 }

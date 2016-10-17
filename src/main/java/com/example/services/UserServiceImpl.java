@@ -58,60 +58,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    @Override
-    public void creerCoach(User u, HttpServletRequest hsr) throws MessagingException {
-        Token t = new Token(tokenService.createToken());
-        Role role = roleService.findRoleByName("COACH");
-        u.getRoles().add(role);
-        t.setUser(u);
-        this.save(u);
-        tokenService.save(t);
-        envoyerEmailActivationCompte(u.getEmail(), t, hsr);
-    }
-
-    @Override
-    public void envoyerEmailActivationCompte(String email, Token token, HttpServletRequest hsr) throws MessagingException {
-        String url = UrlContextPath.getURLWithContextPath(hsr);
-        String to = email; String  subject = "Activation du compte";
-        String content = " <!DOCTYPE html><html><head><title>Page Title</title></head><body>";
-        content += "<p>yo mon gava bien ou koi !? tu t'es bien inscris, tu n'as plus qu'a cliquer sur ce lien pour activer ton compte : </p>";
-        content += "<p><a href='" + url + "/activer?token=" + token.getToken() + "'>activer</a></p>";
-        content += "</body></html>";
-        emailSender.send(to, subject, content);
-    }
-
-    @Override
-    public void verifierEmail(String email) throws CheckEmailException {
-        User user = userRepository.findUserByEmail(email);
-        if(user != null) {
-            if(!user.isEnabled()) {
-                try {
-                    emailSender.send(user.getEmail(), "activer compte", "salut nouveau lien pour activer compte");
-                } catch (MessagingException e) {
-                    System.out.println("email non envoyé");
-                    throw new CheckEmailException("cet email est déjà utilisé, mais vous n'avez pas active le compte, nous avons tenté de vous envoyer un mail pour le réactiver mais cela a échoué." +
-                            "Réessayez plus tard et si le problème persiste veuillez nous contacter");
-                }
-                throw new CheckEmailException("cet email est déjà utilisé, mais vous n'avez pas active le compte, un mail vous a été envoyé pour le faire");
-            } else throw new CheckEmailException("cet email est déjà utilisé");
-        }
-
-    }
-
-    @Override
-    public User activerCompte(String token) throws Exception{
-        User u = this.findUserByTokenToken(token);
-        if(u == null) {
-            throw new Exception("User non trouvé");
-        }
-        u.setConfirmPassword(u.getPassword()); //pour valider validator de l'entite
-        u.setEnabled(true);
-        u.setAccountNonLocked(true);
-        System.err.println("accountnonlocked "+u.isAccountNonLocked());
-        System.err.println("apres set accountnonlocked "+u.isAccountNonLocked());
-        this.save(u);
-        return u;
-    }
 
     @Override
     public void forgetPasswordEnvoieMail(String email) throws CheckEmailException {

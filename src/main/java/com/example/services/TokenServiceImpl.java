@@ -41,4 +41,9 @@ public class TokenServiceImpl implements TokenService{
     public String createToken() {
         return UUID.randomUUID().toString();
     }
+
+    @Override
+    public void delete(Token t) {
+        tokenRepository.delete(t);
+    }
 }

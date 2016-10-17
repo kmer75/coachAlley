@@ -57,7 +57,7 @@ public class EmailSenderServiceImpl implements EmailSenderService{
         context.setVariable("url", urlNomDomain);
         context.setVariable("token", "/activer?token="+token.getToken());
         final String content = templateEngine.process("token", context);
-        this.send(user.getEmail(), "test email", content);
+        this.send(user.getEmail(), "activer votre compte", content);
     }
 
     //methode livré de thymeleaf

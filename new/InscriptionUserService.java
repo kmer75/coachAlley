@@ -13,6 +13,4 @@ public interface InscriptionUserService {
 
     public void creerUser(User u, HttpServletRequest hsr) throws MessagingException;
 
-    public User activerCompte(String token) throws Exception;
-
 }

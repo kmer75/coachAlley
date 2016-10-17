@@ -1,12 +1,10 @@
 package com.example.controllers;
 
+import com.example.Utils.CheckEmailException;
 import com.example.entities.Role;
 import com.example.entities.Token;
 import com.example.entities.User;
-import com.example.services.AuthentificationService;
-import com.example.services.RoleService;
-import com.example.services.TokenService;
-import com.example.services.UserService;
+import com.example.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -27,11 +26,9 @@ public class CoachController {
     @Autowired
     UserService userService;
     @Autowired
-    RoleService roleService;
+    InscriptionUserService inscriptionUserService;
     @Autowired
-    TokenService tokenService;
-    @Autowired
-    AuthentificationService authentificationService;
+    CheckFieldService checkFieldService;
 
 /* enregistrement utilisateur -> role coach */
 
@@ -47,12 +44,16 @@ public class CoachController {
     //si existe: message, sinon go formulaire
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String verif(@Valid @ModelAttribute("coach") User coach, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String verif(@Valid @ModelAttribute("coach") User coach, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest hsr) {
         try {
-            userService.verifierEmail(coach.getEmail());
-        } catch (Exception e) {
+            checkFieldService.verifierEmailInscription(coach.getEmail(), hsr);
+        } catch (CheckEmailException e) {
+            System.out.println("passe ds le catch");
             redirectAttributes.addFlashAttribute("messageInfo", e.getMessage());
-            return "redirect:/checkMail";
+            return "redirect:/form";
+        } catch (MessagingException e) {
+            redirectAttributes.addFlashAttribute("messageInfo", "Une erreur est apparu lors l'envoie du mail afin de réactiver votre compte, vueillez réessayer ultérieurement");
+            return "redirect:/form";
         }
         return "user";
     }
@@ -64,8 +65,9 @@ public class CoachController {
         if(bindingResult.hasErrors()) {;
             return "user";
         }
+
         try {
-            userService.creerCoach(coach, hsr);
+            inscriptionUserService.creerUser(coach, hsr);
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("messageDanger", "il y a eu une erreur lors de l'enregistrement, veuillez reessayer");
             return "redirect:/user";
@@ -83,9 +85,8 @@ public class CoachController {
 
     @RequestMapping(value = "/activer", method = RequestMethod.GET)
     public String show(Model model, @RequestParam(value = "token") String token, RedirectAttributes redirectAttributes) {
-        System.out.println("token du mail : "+token);
             try {
-                userService.activerCompte(token);
+                inscriptionUserService.activerCompte(token);
             }
         catch (Exception e){
             redirectAttributes.addFlashAttribute("messageDanger", e.getMessage());
