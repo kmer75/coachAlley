@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeLeaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorator="fragments/principal">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+
+    <form role="form" th:action="@{/form}" method="post" th:object="${coach}">
+        <div >
+
+
+
+            <div class="row">
+
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <label>Email</label> <input class="form-control" type="email"
+                                                    autocomplete="off" placeholder="Email"
+                                                    th:field="*{email}"
+                                                    data-rule-required="true" data-msg-required="champs requis"
+                                                    data-rule-email="true"
+                                                    data-msg-email="Veuillez entrer une adresse email valide" />
+                        <span class="text-danger" th:errors="*{email}"></span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="form-actions right">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+        </div>
+    </form>
+
+
+</div>
+</body>
+</html>
