@@ -3,6 +3,7 @@ package com.example;
 import com.example.entities.Role;
 import com.example.entities.User;
 import com.example.repositories.RoleRepository;
+import com.example.repositories.TokenRepository;
 import com.example.repositories.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,5 +28,7 @@ public class DemoApplication {
 		Role r3 = new Role("COACH");
 		roleRepository.save(r3);
 */
+		TokenRepository tokenRepository = ctx.getBean(TokenRepository.class);
+
 	}
 }
