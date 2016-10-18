@@ -47,14 +47,19 @@ public class InscriptionUserServiceImpl implements InscriptionUserService{
 
     @Override
     public User activerCompte(String token) throws Exception{
-        User u = userRepository.findUserByTokenToken(token);
-        if(u == null) {
-            throw new Exception("User non trouvé");
+        Token t =tokenService.findTokenByToken(token);
+        if(t == null || !t.getType().equals(""+TokenType.ACTIVE)) throw new Exception("Ce lien d'activation n'existe pas");
+        User u = t.getUser();
+        if(tokenService.isTokenExpired(t)) {
+            t = tokenService.save(new Token(tokenService.createToken(), ""+TokenType.ACTIVE,u));
+            emailSenderService.envoyerMailDuToken(u, t);
+            throw new Exception("Votre lien d'activation a expiré, un nouveau lien vous a été envoyé");
         }
         u.setConfirmPassword(u.getPassword()); //pour valider validator de l'entite
         u.setEnabled(true);
         u.setAccountNonLocked(true);
         userRepository.save(u);
+        tokenService.delete(tokenService.findTokenByToken(token));
         return u;
     }
 

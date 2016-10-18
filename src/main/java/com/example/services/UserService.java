@@ -21,6 +21,8 @@ public interface UserService {
 
     User findUserByTokenToken(String token);
 
+    User findUserByTokenTokenAndTokenType(String token, String type);
+
     List<User> findAll();
 
     User save(User user);

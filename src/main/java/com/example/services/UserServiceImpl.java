@@ -44,6 +44,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserByTokenTokenAndTokenType(String token, String type) {
+        return userRepository.findUserByTokenTokenAndTokenType(token, type);
+    }
+
+    @Override
     public User findUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
     }

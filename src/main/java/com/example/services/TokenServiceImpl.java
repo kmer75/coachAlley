@@ -6,6 +6,7 @@ import com.example.repositories.TokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -45,5 +46,11 @@ public class TokenServiceImpl implements TokenService{
     @Override
     public void delete(Token t) {
         tokenRepository.delete(t);
+    }
+
+    @Override
+    public Boolean isTokenExpired(Token t) {
+        if(t.getExpired().before(new Date())) return true;
+        else return false;
     }
 }

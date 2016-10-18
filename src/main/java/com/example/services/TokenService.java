@@ -21,4 +21,6 @@ public interface TokenService {
     String createToken();
 
     void delete(Token t);
+
+    Boolean isTokenExpired(Token t);
 }
