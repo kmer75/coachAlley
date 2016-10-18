@@ -38,21 +38,21 @@ public class InscriptionUserServiceImpl implements InscriptionUserService{
 
 
     @Override
-    public void creerUser(User u) throws MessagingException {
+    public void creerUser(User u, HttpServletRequest hsr) throws MessagingException {
         Token t = new Token(tokenService.createToken(), ""+TokenType.ACTIVE);
         creationUserService.creerUser(u,t);
-        emailSenderService.envoyerMailDuToken(u, t);
+        emailSenderService.envoyerMailDuToken(u, t, hsr);
     }
 
 
     @Override
-    public User activerCompte(String token) throws Exception{
+    public User activerCompte(String token, HttpServletRequest hsr) throws Exception{
         Token t =tokenService.findTokenByToken(token);
         if(t == null || !t.getType().equals(""+TokenType.ACTIVE)) throw new Exception("Ce lien d'activation n'existe pas");
         User u = t.getUser();
         if(tokenService.isTokenExpired(t)) {
             t = tokenService.save(new Token(tokenService.createToken(), ""+TokenType.ACTIVE,u));
-            emailSenderService.envoyerMailDuToken(u, t);
+            emailSenderService.envoyerMailDuToken(u, t, hsr);
             throw new Exception("Votre lien d'activation a expiré, un nouveau lien vous a été envoyé");
         }
         u.setConfirmPassword(u.getPassword()); //pour valider validator de l'entite
@@ -64,14 +64,14 @@ public class InscriptionUserServiceImpl implements InscriptionUserService{
     }
 
     @Override
-    public void afficherFormulaireInscription(String email) throws CheckEmailException, MessagingException {
+    public void afficherFormulaireInscription(String email, HttpServletRequest hsr) throws CheckEmailException, MessagingException {
         if(checkFieldService.verifierEmailInscription(email).equals("exist")) {
             throw new CheckEmailException("un utilisateur ayant cette adresse email existe dejà");
         } else if(checkFieldService.verifierEmailInscription(email).equals("disabled")){
             User u = userRepository.findUserByEmail(email);
             Token t = new Token(tokenService.createToken(), ""+TokenType.ACTIVE, u);
             tokenService.save(t);
-            emailSenderService.envoyerMailDuToken(u,t);
+            emailSenderService.envoyerMailDuToken(u,t, hsr);
             throw new CheckEmailException("votre compte a été créé mais n'est pas activé, un mail vous a été envoyé pour l'activer");
         }
     }

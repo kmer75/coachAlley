@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 @Service
 public interface InscriptionUserService {
 
-    public void creerUser(User u) throws MessagingException;
+    public void creerUser(User u, HttpServletRequest hsr) throws MessagingException;
 
-    public User activerCompte(String token) throws Exception;
+    public User activerCompte(String token, HttpServletRequest hsr) throws Exception;
 
-    public void afficherFormulaireInscription(String email) throws CheckEmailException, MessagingException;
+    public void afficherFormulaireInscription(String email, HttpServletRequest hsr) throws CheckEmailException, MessagingException;
 
 }

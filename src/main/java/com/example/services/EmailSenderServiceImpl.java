@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.Utils.UrlContextPath;
 import com.example.entities.Token;
 import com.example.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
@@ -41,10 +43,12 @@ public class EmailSenderServiceImpl implements EmailSenderService{
     }
 
     @Override
-    public void envoyerMailDuToken(User user, Token token) throws MessagingException {
+    public void envoyerMailDuToken(User user, Token token, HttpServletRequest hsr) throws MessagingException {
+        String url = UrlContextPath.getURLWithContextPath(hsr);
         Context context = new Context();
         context.setVariable("firstname", user.getFirstname());
         context.setVariable("lastname", user.getLastname());
+        context.setVariable("url", url);
         context.setVariable("token", "/activer?token="+token.getToken());
         final String content = templateEngine.process("token", context);
         this.send(user.getEmail(), "activer votre compte", content);

@@ -8,7 +8,7 @@
 
     <h3 th:text="' Bonjour ' + ${firstname} + ' ' + ${lastname} "></h3>
     <div th:text="'Vous pouvez activer ce compte via ce lien : '"></div>
-    <a th:href="${token}">Activer</a>
+    <a th:href="${url} + ${token}">Activer</a>
 
 
 

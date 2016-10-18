@@ -42,9 +42,9 @@ public class CoachController {
     //si existe: message, sinon go formulaire
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String verif(@Valid @ModelAttribute("coach") User coach, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String verif(@Valid @ModelAttribute("coach") User coach, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest hsr) {
         try {
-            inscriptionUserService.afficherFormulaireInscription(coach.getEmail());
+            inscriptionUserService.afficherFormulaireInscription(coach.getEmail(), hsr);
         } catch (CheckEmailException e) {
             System.out.println("passe ds le catch");
             redirectAttributes.addFlashAttribute("messageInfo", e.getMessage());
@@ -59,13 +59,13 @@ public class CoachController {
     //enregistrement et envoie du mail
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String saveRole(@Valid @ModelAttribute("coach") User coach, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String saveRole(@Valid @ModelAttribute("coach") User coach, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest hsr) {
         if(bindingResult.hasErrors()) {;
             return "user";
         }
 
         try {
-            inscriptionUserService.creerUser(coach);
+            inscriptionUserService.creerUser(coach, hsr);
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("messageDanger", "il y a eu une erreur lors de l'enregistrement, veuillez reessayer");
             return "redirect:/user";
@@ -82,9 +82,9 @@ public class CoachController {
     /* activation du compte */
 
     @RequestMapping(value = "/activer", method = RequestMethod.GET)
-    public String show(Model model, @RequestParam(value = "token") String token, RedirectAttributes redirectAttributes) {
+    public String show(Model model, @RequestParam(value = "token") String token, RedirectAttributes redirectAttributes, HttpServletRequest hsr) {
             try {
-                inscriptionUserService.activerCompte(token);
+                inscriptionUserService.activerCompte(token, hsr);
             }
         catch (Exception e){
             redirectAttributes.addFlashAttribute("messageDanger", e.getMessage());
