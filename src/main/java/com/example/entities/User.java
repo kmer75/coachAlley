@@ -31,9 +31,7 @@ public class User extends AbstractEntity implements Serializable{
     @NotEmpty
     @NotNull
     private String password;
-    @NotEmpty
-    @NotNull(message = "doit correspondre au password")
-    @Transient
+
     private String confirmPassword;
     @NotEmpty
     private String firstname;
@@ -91,7 +89,7 @@ public class User extends AbstractEntity implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
-        checkPassword();//check
+        //checkPassword();
     }
 
     public String getConfirmPassword() {
@@ -100,7 +98,11 @@ public class User extends AbstractEntity implements Serializable{
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
-        checkPassword();//check
+        /*    @NotEmpty
+    @NotNull(message = "doit correspondre au password")
+    @Transient
+        checkPassword();  */
+
     }
 
     public void setPasswordAndConfirmPassword(String newPassword) {

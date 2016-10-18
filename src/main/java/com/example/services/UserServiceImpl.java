@@ -63,26 +63,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-
     @Override
-    public void forgetPasswordEnvoieMail(String email) throws CheckEmailException {
-        User user = userRepository.findUserByEmail(email);
+    public String creerPasswordTemporaire() {
         String uuid = UUID.randomUUID().toString();
         String [] mdp = uuid.split("-");
-        if(user != null) {
-            if(!user.isEnabled()) {
-                throw new CheckEmailException("Votre compte n'a pas été activé");
-            } else {
-                    try {
-                        emailSender.send(user.getEmail(), "mot de passe oublié", "Un nouveau mot de passe vous a été assigné : " + mdp[0]);
-                        user.setPasswordAndConfirmPassword(mdp[0]);
-                        this.save(user);
-                        } catch (MessagingException e) {
-                            System.out.println("email non envoyé");
-                            throw new CheckEmailException("Il y a eu un problème lors de l'envoie du mail de réinitialisation du mot de passe, veuillez réessayer ultérieurement");
-                         }
-                    }
-            } else throw new CheckEmailException("Aucun compte ne correspond à cette adresse email");
+        return mdp[0];
     }
+
 
 }

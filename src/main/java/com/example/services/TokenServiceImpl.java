@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.Utils.TokenType;
 import com.example.entities.Token;
 import com.example.entities.User;
 import com.example.repositories.TokenRepository;
@@ -52,5 +53,12 @@ public class TokenServiceImpl implements TokenService{
     public Boolean isTokenExpired(Token t) {
         if(t.getExpired().before(new Date())) return true;
         else return false;
+    }
+
+    @Override
+    public Token createAndSaveToken(User u, String type) {
+        Token t = new Token(this.createToken(), type, u);
+        this.save(t);
+        return t;
     }
 }

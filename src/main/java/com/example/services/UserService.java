@@ -27,5 +27,5 @@ public interface UserService {
 
     User save(User user);
 
-    void forgetPasswordEnvoieMail(String email) throws CheckEmailException;
+    String creerPasswordTemporaire();
 }

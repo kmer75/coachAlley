@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+
+    <h3 th:text="' Bonjour ' + ${firstname} + ' ' + ${lastname} "></h3>
+    <div th:text="'Vous pouvez réinitialiser votre mot de passe via ce lien : '"></div>
+    <a th:href="${url} + ${forget}">Activer</a>
+
+
+
+</body>
+</html>

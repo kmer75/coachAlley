@@ -9,5 +9,6 @@ import javax.servlet.http.HttpServletRequest;
  * Created by kevin on 18/10/2016.
  */
 public interface CheckFieldService {
-    public String verifierEmailInscription(String email);
+    public String verifierUserEmail(String email);
+
 }

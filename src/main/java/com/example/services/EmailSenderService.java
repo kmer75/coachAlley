@@ -14,4 +14,6 @@ public interface EmailSenderService {
     public void send(String to, String subject, String content) throws MessagingException ;
 
     public void envoyerMailDuToken(User user, Token token, HttpServletRequest hsr) throws MessagingException;
+
+    public void envoyerMailDuMdpOublie(User user, Token token, HttpServletRequest hsr) throws MessagingException;
 }

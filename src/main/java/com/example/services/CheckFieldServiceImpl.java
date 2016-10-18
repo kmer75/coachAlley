@@ -27,7 +27,7 @@ public class CheckFieldServiceImpl implements CheckFieldService {
     TokenService tokenService;
 
     @Override
-    public String verifierEmailInscription(String email) {
+    public String verifierUserEmail(String email) {
         User user = userRepository.findUserByEmail(email);
         if (user == null) {
             return "notExist";

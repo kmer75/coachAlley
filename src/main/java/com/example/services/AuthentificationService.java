@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface AuthentificationService {
 
+    void forgetPasswordProcessFormIdentification(String email, HttpServletRequest hsr) throws Exception;
 
+    User forgetTokenExist(String token, HttpServletRequest hsr) throws Exception;
+
+    void saveUserPasswordDeleteToken(User u, String token);
 
 }

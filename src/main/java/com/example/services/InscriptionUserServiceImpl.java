@@ -51,7 +51,7 @@ public class InscriptionUserServiceImpl implements InscriptionUserService{
         if(t == null || !t.getType().equals(""+TokenType.ACTIVE)) throw new Exception("Ce lien d'activation n'existe pas");
         User u = t.getUser();
         if(tokenService.isTokenExpired(t)) {
-            t = tokenService.save(new Token(tokenService.createToken(), ""+TokenType.ACTIVE,u));
+            t = tokenService.createAndSaveToken(u, ""+TokenType.ACTIVE);
             emailSenderService.envoyerMailDuToken(u, t, hsr);
             throw new Exception("Votre lien d'activation a expiré, un nouveau lien vous a été envoyé");
         }
@@ -59,18 +59,17 @@ public class InscriptionUserServiceImpl implements InscriptionUserService{
         u.setEnabled(true);
         u.setAccountNonLocked(true);
         userRepository.save(u);
-        tokenService.delete(tokenService.findTokenByToken(token));
+        tokenService.delete(t);
         return u;
     }
 
     @Override
     public void afficherFormulaireInscription(String email, HttpServletRequest hsr) throws CheckEmailException, MessagingException {
-        if(checkFieldService.verifierEmailInscription(email).equals("exist")) {
+        if(checkFieldService.verifierUserEmail(email).equals("exist")) {
             throw new CheckEmailException("un utilisateur ayant cette adresse email existe dejà");
-        } else if(checkFieldService.verifierEmailInscription(email).equals("disabled")){
+        } else if(checkFieldService.verifierUserEmail(email).equals("disabled")){
             User u = userRepository.findUserByEmail(email);
-            Token t = new Token(tokenService.createToken(), ""+TokenType.ACTIVE, u);
-            tokenService.save(t);
+            Token t = tokenService.createAndSaveToken(u, ""+TokenType.ACTIVE);
             emailSenderService.envoyerMailDuToken(u,t, hsr);
             throw new CheckEmailException("votre compte a été créé mais n'est pas activé, un mail vous a été envoyé pour l'activer");
         }

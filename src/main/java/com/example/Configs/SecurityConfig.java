@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().frameOptions().sameOrigin();
         http.headers().contentTypeOptions();
-        http.authorizeRequests().antMatchers("/test", "/login", "/index", "/form" , "/new" , "/mail", "/role", "/saveRole", "/user", "/saveUser", "/verif", "/checkMail", "/activer", "/forgetPassword", "/verifMailForgetMdp")
+        http.authorizeRequests().antMatchers("/test", "/login", "/index", "/form" , "/new" , "/mail", "/role", "/saveRole", "/user", "/saveUser", "/verif", "/checkMail", "/activer", "/forgetPassword", "/verifMailForgetMdp", "/forget")
                 .permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
                 .failureHandler(authenticationFailureHandler()).defaultSuccessUrl("/index", false).permitAll().and().logout()
                 .permitAll();

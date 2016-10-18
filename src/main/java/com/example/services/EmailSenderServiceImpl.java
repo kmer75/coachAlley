@@ -8,7 +8,6 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -52,6 +51,19 @@ public class EmailSenderServiceImpl implements EmailSenderService{
         context.setVariable("token", "/activer?token="+token.getToken());
         final String content = templateEngine.process("token", context);
         this.send(user.getEmail(), "activer votre compte", content);
+    }
+
+
+    @Override
+    public void envoyerMailDuMdpOublie(User user, Token token, HttpServletRequest hsr) throws MessagingException {
+        String url = UrlContextPath.getURLWithContextPath(hsr);
+        Context context = new Context();
+        context.setVariable("firstname", user.getFirstname());
+        context.setVariable("lastname", user.getLastname());
+        context.setVariable("url", url);
+        context.setVariable("token", "/forget?token="+token.getToken());
+        final String content = templateEngine.process("token", context);
+        this.send(user.getEmail(), "réinitialiser mot de passe", content);
     }
 
     //methode livré de thymeleaf

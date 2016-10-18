@@ -9,7 +9,7 @@
 <body>
 <div class="container" layout:fragment="content">
 
-    <form role="form" th:action="@{/new}" method="post" th:object="${coach}">
+    <form role="form" th:action="@{/new}" method="post" th:object="${user}">
         <div >
 
             <div class="row">
@@ -94,7 +94,8 @@
                                                     th:field="*{email}"
                                                     data-rule-required="true" data-msg-required="champs requis"
                                                     data-rule-email="true"
-                                                    data-msg-email="Veuillez entrer une adresse email valide" />
+                                                    data-msg-email="Veuillez entrer une adresse email valide"
+                    readonly="readonly"/>
                         <span class="text-danger" th:errors="*{email}"></span>
                     </div>
                 </div>
