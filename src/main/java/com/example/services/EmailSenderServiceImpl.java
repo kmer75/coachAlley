@@ -50,11 +50,10 @@ public class EmailSenderServiceImpl implements EmailSenderService{
     }
 
     @Override
-    public void envoyerMailDuToken(User user, Token token, String urlNomDomain) throws MessagingException {
+    public void envoyerMailDuToken(User user, Token token) throws MessagingException {
         Context context = new Context();
         context.setVariable("firstname", user.getFirstname());
         context.setVariable("lastname", user.getLastname());
-        context.setVariable("url", urlNomDomain);
         context.setVariable("token", "/activer?token="+token.getToken());
         final String content = templateEngine.process("token", context);
         this.send(user.getEmail(), "activer votre compte", content);

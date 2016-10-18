@@ -14,5 +14,5 @@ public interface EmailSenderService {
 
     public void sendHtmlMail(User user, String url) throws MessagingException ;
 
-    public void envoyerMailDuToken(User user, Token token, String urlNomDomain) throws MessagingException;
+    public void envoyerMailDuToken(User user, Token token) throws MessagingException;
 }

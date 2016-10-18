@@ -23,8 +23,6 @@ import java.util.List;
 @DynamicInsert
 public class User extends AbstractEntity implements Serializable{
 
-
-
     @Email
     @NotEmpty
     @Column(unique = true)

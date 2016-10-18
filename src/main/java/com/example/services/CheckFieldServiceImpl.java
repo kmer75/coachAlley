@@ -27,7 +27,27 @@ public class CheckFieldServiceImpl implements CheckFieldService {
     TokenService tokenService;
 
     @Override
-    public void verifierEmailInscription(String email, HttpServletRequest hsr) throws MessagingException, CheckEmailException{
+    public Boolean verifierEmailInscription(String email) {
+        User user = userRepository.findUserByEmail(email);
+        if (user == null) {
+            return true;
+        } else {
+
+            if (!user.isEnabled()) {
+                //envoie du mail
+                return false;
+            }
+        }
+
+        return null;
+
+    }
+
+}
+
+    /*
+    @Override
+    public boolean verifierEmailInscription(String email, HttpServletRequest hsr) throws MessagingException, CheckEmailException{
 
         User user = userRepository.findUserByEmail(email);
         if(user != null) {
@@ -44,4 +64,5 @@ public class CheckFieldServiceImpl implements CheckFieldService {
         }
 
     }
-}
+    */
+

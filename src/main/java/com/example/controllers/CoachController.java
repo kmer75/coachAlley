@@ -42,11 +42,11 @@ public class CoachController {
     }
 
     //si existe: message, sinon go formulaire
-
+/*
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String verif(@Valid @ModelAttribute("coach") User coach, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest hsr) {
+    public String verif(@Valid @ModelAttribute("coach") User coach, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         try {
-            checkFieldService.verifierEmailInscription(coach.getEmail(), hsr);
+            checkFieldService.verifierEmailInscription(coach.getEmail());
         } catch (CheckEmailException e) {
             System.out.println("passe ds le catch");
             redirectAttributes.addFlashAttribute("messageInfo", e.getMessage());
@@ -57,17 +57,17 @@ public class CoachController {
         }
         return "user";
     }
-
+*/
     //enregistrement et envoie du mail
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String saveRole(@Valid @ModelAttribute("coach") User coach, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest hsr) {
+    public String saveRole(@Valid @ModelAttribute("coach") User coach, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if(bindingResult.hasErrors()) {;
             return "user";
         }
 
         try {
-            inscriptionUserService.creerUser(coach, hsr);
+            inscriptionUserService.creerUser(coach);
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("messageDanger", "il y a eu une erreur lors de l'enregistrement, veuillez reessayer");
             return "redirect:/user";

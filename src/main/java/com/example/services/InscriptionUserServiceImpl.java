@@ -32,11 +32,10 @@ public class InscriptionUserServiceImpl implements InscriptionUserService{
     UserRepository userRepository;
 
     @Override
-    public void creerUser(User u, HttpServletRequest hsr) throws MessagingException {
+    public void creerUser(User u) throws MessagingException {
         Token t = new Token(tokenService.createToken());
-        String url = UrlContextPath.getURLWithContextPath(hsr);
         creationUserService.creerUser(u,t);
-        emailSenderService.envoyerMailDuToken(u, t, url);
+        emailSenderService.envoyerMailDuToken(u, t);
     }
 
 

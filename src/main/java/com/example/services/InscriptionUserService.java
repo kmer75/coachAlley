@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface InscriptionUserService {
 
-    public void creerUser(User u, HttpServletRequest hsr) throws MessagingException;
+    public void creerUser(User u) throws MessagingException;
 
     public User activerCompte(String token) throws Exception;
 
