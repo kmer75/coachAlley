@@ -33,33 +33,7 @@ public class TestController {
     public String login() {
         return "login";
     }
-/*
-    @RequestMapping(value = "/mail", method = RequestMethod.GET)
-    public String mail(String to, String subject, String content) {
-        to = "user@gmail.com";
-        subject = "test envoie mail";
-        content = "yo mon gava bien ou koi !?";
-        try {
-            System.err.println("passe ds le try");
-            emailSender.send(to, subject, content);
-        } catch (Exception e) {
-            System.err.println("email non envoyé");
-        }
 
-        return "login";
-    }
-*/
-    @RequestMapping(value = "/mail", method = RequestMethod.GET)
-    public String mail(HttpServletRequest hsr) {
-        String url = UrlContextPath.getURLWithContextPath(hsr);
-        User u = userService.findOne(1L);
-        try {
-            emailSender.sendHtmlMail(u, url);
-        } catch (MessagingException e) {
-            System.err.println(e);
-        }
-        return "index";
-    }
 
 
 

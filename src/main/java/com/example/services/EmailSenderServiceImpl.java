@@ -39,15 +39,6 @@ public class EmailSenderServiceImpl implements EmailSenderService{
         messageHelper.setText(content);
         javaMailSender.send(mimeMessage);
     }
-    @Override
-    public void sendHtmlMail(User user, String url) throws MessagingException {
-        Context context = new Context();
-        context.setVariable("firstname", user.getFirstname());
-        context.setVariable("lastname", user.getLastname());
-        context.setVariable("url", url);
-        final String content = templateEngine.process("email", context);
-        this.send(user.getEmail(), "test email", content);
-    }
 
     @Override
     public void envoyerMailDuToken(User user, Token token) throws MessagingException {

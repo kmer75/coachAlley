@@ -27,19 +27,16 @@ public class CheckFieldServiceImpl implements CheckFieldService {
     TokenService tokenService;
 
     @Override
-    public Boolean verifierEmailInscription(String email) {
+    public String verifierEmailInscription(String email) {
         User user = userRepository.findUserByEmail(email);
         if (user == null) {
-            return true;
+            return "notExist";
         } else {
 
             if (!user.isEnabled()) {
-                //envoie du mail
-                return false;
-            }
+                return "disabled";
+            } else return "exist";
         }
-
-        return null;
 
     }
 

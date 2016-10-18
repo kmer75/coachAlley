@@ -27,8 +27,6 @@ public class CoachController {
     UserService userService;
     @Autowired
     InscriptionUserService inscriptionUserService;
-    @Autowired
-    CheckFieldService checkFieldService;
 
 /* enregistrement utilisateur -> role coach */
 
@@ -42,11 +40,11 @@ public class CoachController {
     }
 
     //si existe: message, sinon go formulaire
-/*
+
     @RequestMapping(value = "/form", method = RequestMethod.POST)
     public String verif(@Valid @ModelAttribute("coach") User coach, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         try {
-            checkFieldService.verifierEmailInscription(coach.getEmail());
+            inscriptionUserService.afficherFormulaireInscription(coach.getEmail());
         } catch (CheckEmailException e) {
             System.out.println("passe ds le catch");
             redirectAttributes.addFlashAttribute("messageInfo", e.getMessage());
@@ -57,7 +55,7 @@ public class CoachController {
         }
         return "user";
     }
-*/
+
     //enregistrement et envoie du mail
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)

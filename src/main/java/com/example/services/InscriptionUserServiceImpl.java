@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.Utils.CheckEmailException;
 import com.example.Utils.UrlContextPath;
 import com.example.entities.Role;
 import com.example.entities.Token;
@@ -31,6 +32,10 @@ public class InscriptionUserServiceImpl implements InscriptionUserService{
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    CheckFieldService checkFieldService;
+
+
     @Override
     public void creerUser(User u) throws MessagingException {
         Token t = new Token(tokenService.createToken());
@@ -52,4 +57,17 @@ public class InscriptionUserServiceImpl implements InscriptionUserService{
         return u;
     }
 
+    @Override
+    public void afficherFormulaireInscription(String email) throws CheckEmailException, MessagingException {
+        if(checkFieldService.verifierEmailInscription(email).equals("exist")) {
+            throw new CheckEmailException("un utilisateur ayant cette adresse email existe dejà");
+        } else if(checkFieldService.verifierEmailInscription(email).equals("disabled")){
+            User u = userRepository.findUserByEmail(email);
+            Token t = new Token(tokenService.createToken());
+            t.setUser(u);
+            tokenService.save(t);
+            emailSenderService.envoyerMailDuToken(u,t);
+            throw new CheckEmailException("votre compte a été créé mais n'est pas activé, un mail vous a été envoyé pour l'activer");
+        }
+    }
 }
