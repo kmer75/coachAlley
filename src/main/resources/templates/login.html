@@ -10,18 +10,32 @@
 
 <div class="container" layout:fragment="content">
 
+    <div th:if="${param.error != null}" class="alert alert-danger" >
+        <button class="close" data-close="alert"></button>
+        <div th:switch="${param.error[0]}">
+            <span th:case="'badCredentials'"> Email ou mot de passe invalide. </span>
+            <span th:case="'disabled'"> Ce compte n'est pas encore activé. </span>
+            <span th:case="'locked'"> Ce compte est bloqué. Veuillez contacter l'administrateur.</span>
+        </div>
+    </div>
+
+
     <h1>Login</h1>
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-    <form class="login-form" th:action="@{/login}" method="post" >
+    <form id="login" class="login-form" th:action="@{/login}" method="post" >
         <div class="form-group">
             <label for="email">email</label>
+            <div class="light">
             <input name="username" type="email" class="form-control" id="email" placeholder="Email"/>
+            </div>
         </div>
 
         <div class="form-group">
             <label for="password">Password</label>
+            <div class="light">
             <input name="password" type="password" class="form-control" id="password" placeholder="Password"/>
+        </div>
         </div>
         <small class="text-primary">j’ai oublié mon <a th:href="@{/forgetPassword}">mot de passe</a></small>
 

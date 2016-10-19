@@ -1,34 +1,36 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeLeaf.org"
-       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorator="fragments/principal">
+<html xmlns:th="http://www.thymeLeaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="fragments/principal">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Title</title>
 </head>
 <body>
 <div class="container" layout:fragment="content">
 
-    <form role="form" th:action="@{/new}" method="post" th:object="${user}">
-        <div >
+    <form id="signupForm" role="form" th:action="@{/new}" method="post" th:object="${user}">
+        <div>
 
             <div class="row">
                 <div class="col-md-6 ">
                     <div class="form-group">
-                        <label>Nom</label> <input class="form-control" type="text"
-                                                  placeholder="Nom" th:field="*{lastname}"
-                                                  data-rule-required="true"
-                                                  data-msg-required="champs requis" />
+                        <label>Nom</label>
+                        <div class="light">
+                        <input class="form-control" type="text"
+                                                  placeholder="Nom" th:field="*{lastname}"/>
+                        </div>
                         <span class="text-danger" th:errors="*{lastname}"></span>
                     </div>
                 </div>
                 <div class="col-md-6 ">
                     <div class="form-group">
                         <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-                        <label>Prenom</label> <input class="form-control" type="text"
-                                                     placeholder="Prenom" th:field="*{firstname}"
-                                                     data-rule-required="true"
-                                                     data-msg-required="champs requis" />
+                        <label>Prenom</label>
+                        <div class="light">
+                        <input class="form-control" type="text"
+                                                     placeholder="Prenom" th:field="*{firstname}"/>
+                        </div>
                         <span class="text-danger" th:errors="*{firstname}"></span>
                     </div>
                 </div>
@@ -37,19 +39,21 @@
             <div class="row">
                 <div class="col-md-6 ">
                     <div class="form-group">
-                        <label>Adresse</label> <input class="form-control"
-                                                      type="text" placeholder="Adresse" th:field="*{address}"
-                                                      data-rule-required="true"
-                                                      data-msg-required="champs requis" />
+                        <label>Adresse</label>
+                        <div class="light">
+                        <input class="form-control"
+                                                      type="text" placeholder="Adresse" th:field="*{address}"/>
+                        </div>
                         <span class="text-danger" th:errors="*{address}"></span>
                     </div>
                 </div>
                 <div class="col-md-6 ">
                     <div class="form-group">
-                        <label>Code postal</label> <input class="form-control"
-                                                          type="text" placeholder="Code postal"
-                                                          th:field="*{zipcode}"
-                                                          data-rule-required="true" data-msg-required="champs requis" />
+                        <label>Code postal</label>
+                        <div class="light">
+                        <input class="form-control"
+                                                          type="text" placeholder="Code postal"/>
+                        </div>
                         <span class="text-danger" th:errors="*{zipcode}"></span>
                     </div>
                 </div>
@@ -58,19 +62,21 @@
             <div class="row">
                 <div class="col-md-6 ">
                     <div class="form-group">
-                        <label>Ville</label> <input class="form-control" type="text"
-                                                    placeholder="Ville" th:field="*{city}"
-                                                    data-rule-required="true"
-                                                    data-msg-required="champs requis" />
+                        <label>Ville</label>
+                        <div class="light">
+                        <input class="form-control" type="text"
+                                                    placeholder="Ville" th:field="*{city}"/>
+                        </div>
                         <span class="text-danger" th:errors="*{city}"></span>
                     </div>
                 </div>
                 <div class="col-md-6 ">
                     <div class="form-group">
-                        <label>Pays</label> <input class="form-control" type="text"
-                                                   placeholder="Pays" th:field="*{country}"
-                                                   data-rule-required="true"
-                                                   data-msg-required="champs requis" />
+                        <label>Pays</label>
+                        <div class="light">
+                        <input class="form-control" type="text"
+                                                   placeholder="Pays" th:field="*{country}"/>
+                        </div>
                         <span class="text-danger" th:errors="*{country}"></span>
                     </div>
                 </div>
@@ -80,52 +86,52 @@
             <div class="row">
                 <div class="col-md-6 ">
                     <div class="form-group">
-                        <label>Téléphone mobile</label> <input class="form-control"
-                                                               type="text" placeholder="n° tél." th:field="*{phone}"
-                                                               data-rule-required="true"
-                                                               data-msg-required="champs requis" />
+                        <label>Téléphone mobile</label>
+                        <div class="light">
+                        <input class="form-control"
+                                                               type="text" placeholder="n° tél." th:field="*{phone}"/>
+                        </div>
                         <span class="text-danger" th:errors="*{phone}"></span>
                     </div>
                 </div>
                 <div class="col-md-6 ">
                     <div class="form-group">
-                        <label>Email</label> <input class="form-control" type="email"
+                        <label>Email</label>
+                        <div class="light">
+                        <input class="form-control" type="email"
                                                     autocomplete="off" placeholder="Email"
                                                     th:field="*{email}"
-                                                    data-rule-required="true" data-msg-required="champs requis"
-                                                    data-rule-email="true"
-                                                    data-msg-email="Veuillez entrer une adresse email valide"
-                    readonly="readonly"/>
+                                                    readonly="readonly"/>
+                        </div>
                         <span class="text-danger" th:errors="*{email}"></span>
                     </div>
                 </div>
             </div>
 
 
-                      <div class="row">
-                            <div class="col-md-6 ">
-                                <div class="form-group">
-                                    <label>Mot de passe</label> <input class="form-control"
-                                                                           type="text" th:field="*{password}"
-                                                                           data-rule-required="true"
-                                                                           data-msg-required="champs requis" />
-                                    <span class="text-danger" th:errors="*{password}"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 ">
-                                <div class="form-group">
-                                    <label>confirmer mot depasse</label> <input class="form-control" type="text"
-                                                                autocomplete="off"
-                                                                th:field="*{confirmPassword}"
-                                                                data-rule-required="true" data-msg-required="champs requis"
-                                                                data-rule-email="true"
-                                                                data-msg-email="Veuillez entrer une adresse email valide" />
-                                                        <span class="text-danger" th:errors="*{confirmPassword}"></span>
-                                </div>
-                            </div>
+            <div class="row">
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <div class="light">
+                        <input class="form-control"
+                               type="text" th:field="*{password}"/>
                         </div>
-
-
+                        <span class="text-danger" th:errors="*{password}"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <label>confirmer mot depasse</label>
+                        <div class="light">
+                        <input class="form-control" type="text"
+                                                                    autocomplete="off"
+                                                                    th:field="*{confirmPassword}"/>
+                        </div>
+                        <span class="text-danger" th:errors="*{confirmPassword}"></span>
+                    </div>
+                </div>
+            </div>
 
 
         </div>
@@ -137,5 +143,7 @@
 
 
 </div>
+
+
 </body>
 </html>

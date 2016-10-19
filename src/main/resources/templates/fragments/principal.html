@@ -13,6 +13,15 @@
 <div layout:fragment="content"></div>
 <div th:include="fragments/footer :: footer"></div>
 
+<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js}"></script>
+<script th:src="@{/js/jquery.validate.js}"></script>
+<script th:src="@{/js/form_validators.js}"></script>
+
+<script>
+    $( document ).ready(function() {
+        console.log( "ready!" );
+    });
+</script>
 
 </body>
 </html>

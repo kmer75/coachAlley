@@ -9,7 +9,7 @@
 <body>
 <div class="container" layout:fragment="content">
 
-    <form role="form" th:action="@{/form}" method="post">
+    <form id="checkEmailExist" role="form" th:action="@{/form}" method="post">
         <div >
 
 
@@ -18,12 +18,12 @@
 
                 <div class="col-md-6 ">
                     <div class="form-group">
-                        <label>Email</label> <input class="form-control" type="email"
+                        <label>Email</label>
+                        <div class="light">
+                        <input class="form-control" type="email"
                                                     name="email"
-                                                    autocomplete="off" placeholder="Email"
-                                                    data-rule-required="true" data-msg-required="champs requis"
-                                                    data-rule-email="true"
-                                                    data-msg-email="Veuillez entrer une adresse email valide" />
+                                                    autocomplete="off" placeholder="Email" />
+                    </div>
                     </div>
                 </div>
             </div>
@@ -40,5 +40,8 @@
 
 
 </div>
+
+
+
 </body>
 </html>
