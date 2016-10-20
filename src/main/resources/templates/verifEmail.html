@@ -7,7 +7,15 @@
     <title>Title</title>
 </head>
 <body>
+
+<div layout:fragment="javascript">
+    <script th:src="@{/js/jquery.validate.js}"></script>
+    <script th:src="@{/js/form_validators.js}"></script>
+</div>
+
 <div class="container" layout:fragment="content">
+
+
 
     <form id="checkEmailExist" role="form" th:action="@{/form}" method="post">
         <div >

@@ -7,6 +7,15 @@
     <title>Title</title>
 </head>
 <body>
+
+<div layout:fragment="javascript">
+    <script th:src="@{/js/jquery.validate.js}"></script>
+    <script th:src="@{/js/form_validators.js}"></script>
+    <script th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyC2twVFKkR1IUUw_35R1gagozLfZWrOnSY&amp;signed_in=true&amp;libraries=places&amp;callback=initAutocomplete}"
+            async="async" defer="defer"></script>
+    <script th:src="@{/js/autocompleteForm.js}"></script>
+</div>
+
 <div class="container" layout:fragment="content">
 
     <form id="signupForm" role="form" th:action="@{/new}" method="post" th:object="${user}">
@@ -37,12 +46,23 @@
             </div>
 
             <div class="row">
+                <div class="col-md-12 ">
+                    <div class="form-group">
+                        <label>Google autocompletion address</label>
+                        <div class="light">
+                            <input  class="text-center form-control" id="autocomplete" placeholder="Entrer votre adresse" type="text"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="col-md-6 ">
                     <div class="form-group">
                         <label>Adresse</label>
                         <div class="light">
                         <input class="form-control"
-                                                      type="text" placeholder="Adresse" th:field="*{address}"/>
+                                                      type="text" placeholder="Adresse" th:field="*{address}" readonly="readonly"/>
                         </div>
                         <span class="text-danger" th:errors="*{address}"></span>
                     </div>
@@ -51,8 +71,7 @@
                     <div class="form-group">
                         <label>Code postal</label>
                         <div class="light">
-                        <input class="form-control"
-                                                          type="text" placeholder="Code postal"/>
+                        <input class="form-control" type="text" placeholder="Code postal" th:field="*{zipcode}" readonly="readonly"/>
                         </div>
                         <span class="text-danger" th:errors="*{zipcode}"></span>
                     </div>
@@ -65,7 +84,7 @@
                         <label>Ville</label>
                         <div class="light">
                         <input class="form-control" type="text"
-                                                    placeholder="Ville" th:field="*{city}"/>
+                                                    placeholder="Ville" th:field="*{city}" readonly="readonly"/>
                         </div>
                         <span class="text-danger" th:errors="*{city}"></span>
                     </div>
@@ -75,7 +94,7 @@
                         <label>Pays</label>
                         <div class="light">
                         <input class="form-control" type="text"
-                                                   placeholder="Pays" th:field="*{country}"/>
+                                                   placeholder="Pays" th:field="*{country}" readonly="readonly"/>
                         </div>
                         <span class="text-danger" th:errors="*{country}"></span>
                     </div>

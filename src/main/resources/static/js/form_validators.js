@@ -103,6 +103,18 @@ $( document ).ready( function () {
                 required: true,
                 email: true
             },
+            address: {
+                required: true,
+            },
+            zipcode: {
+                required: true,
+            },
+            country: {
+                required: true,
+            },
+            city: {
+                required: true,
+            },
         },
         messages: {
 
@@ -124,6 +136,10 @@ $( document ).ready( function () {
                 equalTo: "doit être équivalent au mot de passe saisis"
             },
             email: "Veuillez renseigner votre adresse email",
+            address: "Veuillez sélectionner votre adresse",
+            zipcode: "Veuillez sélectionner votre adresse",
+            city: "Veuillez sélectionner votre adresse",
+            country: "Veuillez sélectionner votre adresse",
         },
         errorElement: "em",
         errorPlacement: function ( error, element ) {
