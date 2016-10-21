@@ -26,10 +26,16 @@ function fillInAddress() {
     console.log(country);
     zipcode = place.address_components[6].long_name;
     console.log(zipcode);
+    lat = place.geometry.location.lat();
+    console.log(lat);
+    lng = place.geometry.location.lng();
+    console.log(lng);
     $('#address').val(num + ' ' + rue);
     $('#city').val(city);
     $('#country').val(country);
     $('#zipcode').val(zipcode);
+    $('#geoLat').val(lat);
+    $('#geoLong').val(lng);
 
 
 }

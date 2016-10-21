@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
-    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -14,12 +14,21 @@
 <div th:include="fragments/footer :: footer"></div>
 
 <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js}"></script>
+<script th:src="@{js/bootstrap/bootstrap.min.js}"></script>
 
 <div layout:fragment="javascript"></div>
 
 <script>
     $( document ).ready(function() {
         console.log( "ready!" );
+        /*
+        $(".nav a").on("click", function(){
+            $(".nav").find(".active").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+        */
+        $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
+        console.log(this.location.pathname);
     });
 </script>
 

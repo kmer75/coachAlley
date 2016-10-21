@@ -34,6 +34,11 @@ public class TestController {
         return "login";
     }
 
+    @RequestMapping(value = "/log", method = RequestMethod.GET)
+    public String log() {
+        return "redirect:/login";
+    }
+
 
 
 

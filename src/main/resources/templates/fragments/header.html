@@ -8,49 +8,62 @@
 <body>
 
 <div th:fragment="header">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-                    <span class="sr-only">Toggle navigation</span>
+                <a href="../" class="navbar-brand">Index</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Brand</a>
             </div>
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <div class="navbar-collapse collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Link</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes" aria-expanded="false">Coach Alley <span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="themes">
+                            <li><a th:href="@{/login}">une page</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
+                            <li><a th:href="@{/}">une page</a></li>
+                            <li><a th:href="@{/}">une page</a></li>
+                            <li><a th:href="@{/}">une page</a></li>
+                            <li><a th:href="@{/}">une page</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a th:href="@{/index}">Commander</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/forgetPassword}">Géolocalisation</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/}">Recrutement</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/}">Nous contacter</a>
+                    </li>
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle " data-toggle="dropdown" aria-expanded="false"><b class=" glyphicon glyphicon-user"></b> Se Connecter</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a th:href="@{/log}"> Déjà Inscrit?</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/form}"> Nouvelle Inscription</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search"/>
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
-                </ul>
+
             </div>
         </div>
-    </nav>
-
-
+    </div>
 
     <h5 th:text="${#authentication.principal == 'anonymousUser'} ? 'utilisateur non connecté' : ${#authentication.principal.user.email}"></h5>
     <div th:if="${#authentication.principal != 'anonymousUser'}">

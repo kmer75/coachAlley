@@ -140,10 +140,8 @@ public class UserController {
         System.out.println(user);
         System.out.println(token);
         if(bindingResult.hasFieldErrors("password") && bindingResult.hasFieldErrors("confirmPassword")) {
-            System.out.println(bindingResult.getAllErrors());
-            //return "/forget?token="+token;
+            System.err.println(bindingResult.getAllErrors());
         }
-        System.out.println("mdp -> " + user.getPassword() + " confirm -> "+ user.getConfirmPassword());
         authentificationService.saveUserPasswordDeleteToken(user, token);
         sessionStatus.setComplete();
         redirectAttributes.addFlashAttribute("messageSuccess", "le mot de passe a été changé avec succès");
