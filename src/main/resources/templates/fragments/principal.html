@@ -21,14 +21,7 @@
 <script>
     $( document ).ready(function() {
         console.log( "ready!" );
-        /*
-        $(".nav a").on("click", function(){
-            $(".nav").find(".active").removeClass("active");
-            $(this).parent().addClass("active");
-        });
-        */
         $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
-        console.log(this.location.pathname);
     });
 </script>
 

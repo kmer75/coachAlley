@@ -71,9 +71,18 @@
     </div>
 
 
-    <div th:text="${messageInfo != null} ? ${messageInfo}" th:class="${messageInfo != null} ? 'container alert alert-info'"></div>
-    <div th:text="${messageSuccess != null} ? ${messageSuccess}" th:class="${messageSuccess != null} ? 'container alert alert-success'"></div>
-    <div th:text="${messageDanger != null} ? ${messageDanger}" th:class="${messageDanger != null} ? 'container alert alert-danger'"></div>
+    <div th:if="${messageInfo != null}" class="container alert alert-info fade in">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <span th:text="${messageInfo}"></span>
+    </div>
+    <div th:if="${messageSuccess != null}" class="container alert success fade in">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <span th:text="${messageSuccess}"></span>
+    </div>
+    <div th:if="${messageDanger != null}" class="container alert alert-danger fade in">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <span th:text="${messageDanger}"></span>
+    </div>
 
 </div>
 

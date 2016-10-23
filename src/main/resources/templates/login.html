@@ -15,8 +15,8 @@
 
 <div class="container" layout:fragment="content">
 
-    <div th:if="${param.error != null}" class="alert alert-danger" >
-        <button class="close" data-close="alert"></button>
+    <div th:if="${param.error != null}" class="alert alert-danger fade in" >
+        <button class="close" data-dismiss="alert">&times;</button>
         <div th:switch="${param.error[0]}">
             <span th:case="'badCredentials'"> Email ou mot de passe invalide. </span>
             <span th:case="'disabled'"> Ce compte n'est pas encore activé. </span>
