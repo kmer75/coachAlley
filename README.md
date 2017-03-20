@@ -8,3 +8,15 @@ validation formulaire en JS (jquery ui validation), autocompletion saisie d'adre
 
 # 
 J'en ai fait un sample sur lequel je peux m'appuyer pour commencer un projet
+#
+les technos utilisées sont : Java JEE,
+Spring MVC,
+Spring Security,
+JPA,
+JavaMailSender,
+Thymeleaf (moteur de template),
+HTML/CSS Bootstrap/JS Jquery, AJAX,
+web Service (REST),
+Maven,
+Junit (test unitaire),
+BDD MySQL
